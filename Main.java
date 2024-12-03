@@ -2,15 +2,9 @@ import java.util.Scanner;
 
 class Main {
     
-    Scanner input = new Scanner(System.in);
-    
-    public static void percentConvert(double numberToConvert) {
-            double n = numberToConvert;
-            double percent = n / 100;
-            System.out.println("Percentage as a decimal");
-        }
-    
     static void defaultBudget(double amount) {
+        
+        Scanner input = new Scanner(System.in);
         
         double salary = amount;
         
@@ -29,18 +23,44 @@ class Main {
     
     static void customBudget(double amount) {
         
+        Scanner input = new Scanner(System.in);
+        
         double salary = amount;
+        double needsAllocation, wantsAllocation, savingsAllocation;
         
-        System.out.print("Enter your budget allocation for needs: ");
-        needsAllocation = input.nextDouble();
-        System.out.print("Enter your budget allocation for wants: ");
-        wantsAllocation = input.nextDouble();
-        System.out.print("Enter your budget allocation for savings: ");
-        savingsAllocation = input.nextDouble();
+        // collect needs budget allocation info
+        do {
+            System.out.print("Enter your budget allocation for needs: ");
+            needsAllocation = input.nextDouble();
+            if (needsAllocation < 0 || needsAllocation > 1) {
+                    System.out.println("Error. Number not entered as a decimal to be calculated as a percentage. Please Try again."); 
+            }
+        }
+        while (needsAllocation < 0 || needsAllocation > 1);
         
-        double needsAllocation = percentConvert(), wantsAllocation = percentConvert(), savingsAllocation = percentConvert();
+        // collect wants budget allocation info
+        do {
+            System.out.print("Enter your budget allocation for needs: ");
+            wantsAllocation = input.nextDouble();
+            if (wantsAllocation < 0 || wantsAllocation > 1) {
+                    System.out.println("Error. Number not entered as a decimal to be calculated as a percentage. Please Try again."); 
+            }
+        }
+        while (wantsAllocation < 0 || wantsAllocation > 1);
         
-        double needs = needsAllocation * salary, wants = wantsAllocation * salary, savings = savingsAllocation * salary;
+        // collect savings budget allocation infO
+        do {
+            System.out.print("Enter your budget allocation for needs: ");
+            savingsAllocation = input.nextDouble();
+            if (savingsAllocation < 0 || savingsAllocation > 1) {
+                    System.out.println("Error. Number not entered as a decimal to be calculated as a percentage. Please Try again."); 
+            }
+        }
+        while (savingsAllocation < 0 || savingsAllocation > 1);
+        
+        double needs = needsAllocation * salary;
+        double wants = wantsAllocation * salary;
+        double savings = savingsAllocation * salary;
         
         try {
             System.out.println("Salary: $" + salary);
@@ -55,6 +75,8 @@ class Main {
     
     public static void main(String[] args) {
         
+        Scanner input = new Scanner(System.in);
+        
         int choice;
         double salary;
         
@@ -62,14 +84,16 @@ class Main {
         salary = input.nextDouble();
         System.out.println("0 for Default Budget (50-30-20)");
         System.out.println("1 for Custom Budget");
-        System.out.println("Enter your choice: ");
+        System.out.print("Enter your choice: ");
         choice = input.nextInt();
         
         switch (choice) {
             case 0:
                 defaultBudget(salary);
+                break;
             case 1:
                 customBudget(salary);
+                break;
         }
         
     }
