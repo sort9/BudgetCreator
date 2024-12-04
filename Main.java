@@ -26,7 +26,7 @@ class Main {
         Scanner input = new Scanner(System.in);
         
         double salary = amount;
-        double needsAllocation, wantsAllocation, savingsAllocation;
+        double needsAllocation, wantsAllocation, savingsAllocation, totalAllocation;
         
         // collect needs budget allocation info
         do {
@@ -48,7 +48,7 @@ class Main {
         }
         while (wantsAllocation < 0 || wantsAllocation > 1);
         
-        // collect savings budget allocation infO
+        // collect savings budget allocation info
         do {
             System.out.print("Enter your budget allocation for needs: ");
             savingsAllocation = input.nextDouble();
@@ -58,13 +58,29 @@ class Main {
         }
         while (savingsAllocation < 0 || savingsAllocation > 1);
         
+        totalAllocation = needsAllocation + wantsAllocation + savingsAllocation;
+        
+        // error handling for when total allocation is greater than 1
+        if (totalAllocation > 1) {
+            System.out.println("Error: Salary not allocated properly | Reason: total budget allocation is more than 1");
+            // input reprompt functionality or change code that comes before this
+        }
+        
+        // error handling for when total allocation is less than 1
+        if (totalAllocation < 1) {
+            System.out.println("Error: Salary not allocated properly | Reason: total budget allocation is less than 1");
+            // input reprompt functionality or change code that comes before this
+        }
+        
         double needs = needsAllocation * salary;
         double wants = wantsAllocation * salary;
         double savings = savingsAllocation * salary;
         
         try {
+            System.out.println("-------------------------------");
             System.out.println("Salary: $" + salary);
-            System.out.println("Allowance for Needs: $" + needs);
+            System.out.println("\n-------------------------------");
+            System.out.println("\nAllowance for Needs: $" + needs);
             System.out.println("Allowance for Savings: $" + savings);
             System.out.println("Allowance for Wants: $" + wants);
         }
